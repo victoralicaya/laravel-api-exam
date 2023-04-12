@@ -1,0 +1,790 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://exam.localhost'
+paths:
+  /api/login:
+    post:
+      summary: 'User Login'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: carroll.rubye@example.com
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: ihymuhz
+              required:
+                - email
+                - password
+  /api/task:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: query
+          name: completed_date_from
+          description: 'Date From.'
+          example: sed
+          required: false
+          schema:
+            type: string
+            description: 'Date From.'
+            example: sed
+        -
+          in: query
+          name: completed_date_to
+          description: 'Date To.'
+          example: eaque
+          required: false
+          schema:
+            type: string
+            description: 'Date To.'
+            example: eaque
+        -
+          in: query
+          name: due_date_from
+          description: 'Due Date From.'
+          example: est
+          required: false
+          schema:
+            type: string
+            description: 'Due Date From.'
+            example: est
+        -
+          in: query
+          name: due_date_to
+          description: 'Due Date To.'
+          example: dolore
+          required: false
+          schema:
+            type: string
+            description: 'Due Date To.'
+            example: dolore
+        -
+          in: query
+          name: archive_date_from
+          description: 'Archive Date From.'
+          example: architecto
+          required: false
+          schema:
+            type: string
+            description: 'Archive Date From.'
+            example: architecto
+        -
+          in: query
+          name: archive_date_to
+          description: 'Archive Date To.'
+          example: laudantium
+          required: false
+          schema:
+            type: string
+            description: 'Archive Date To.'
+            example: laudantium
+        -
+          in: query
+          name: title
+          description: Title.
+          example: et
+          required: false
+          schema:
+            type: string
+            description: Title.
+            example: et
+        -
+          in: query
+          name: description
+          description: Description.
+          example: dolorum
+          required: false
+          schema:
+            type: string
+            description: Description.
+            example: dolorum
+        -
+          in: query
+          name: priority
+          description: 'Priority (1 = Low, 2 = Normal, 3 = High, 4 = Urgent)'
+          example: 14
+          required: false
+          schema:
+            type: integer
+            description: 'Priority (1 = Low, 2 = Normal, 3 = High, 4 = Urgent)'
+            example: 14
+        -
+          in: query
+          name: sort
+          description: 'Sort By title, description, due_date, created_at, completed_date'
+          example: consequatur
+          required: false
+          schema:
+            type: string
+            description: 'Sort By title, description, due_date, created_at, completed_date'
+            example: consequatur
+        -
+          in: query
+          name: sort_level
+          description: 'Sort By Priority (value = asc or desc)'
+          example: deserunt
+          required: false
+          schema:
+            type: string
+            description: 'Sort By Priority (value = asc or desc)'
+            example: deserunt
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: debitis
+                description:
+                  type: string
+                  description: ''
+                  example: repellat
+                due_date:
+                  type: string
+                  description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d</code>. Must be a date after or equal to <code>2022-08-27</code>.'
+                  example: '2053-03-12'
+                priority:
+                  type: string
+                  description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.'
+                  example: '1'
+              required:
+                - title
+                - description
+  '/api/task/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: inventore
+                description:
+                  type: string
+                  description: ''
+                  example: ut
+                due_date:
+                  type: string
+                  description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d</code>. Must be a date after or equal to <code>2022-08-27</code>.'
+                  example: '2118-09-09'
+                priority:
+                  type: string
+                  description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.'
+                  example: '2'
+              required:
+                - title
+                - description
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the task.'
+        example: 51
+        required: true
+        schema:
+          type: integer
+  '/api/archive/{task_id}':
+    put:
+      summary: 'Archive a task.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: task_id
+        description: 'The ID of the task.'
+        example: 51
+        required: true
+        schema:
+          type: integer
+  /api/logout:
+    get:
+      summary: 'User Logout'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+  /api/user:
+    get:
+      summary: 'Get Loggedin User'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+  /api/registration:
+    post:
+      summary: 'User Registration'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: labore
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: estefania51@example.net
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: flnq
+              required:
+                - name
+                - email
+                - password
+  /api/file-upload:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: string
+                  description: ''
+                  example: aliquid
+                files:
+                  type: array
+                  description: 'Must be a file.'
+                  items:
+                    type: string
+                    format: binary
+              required:
+                - task_id
+  '/api/file-upload/{id}':
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the file upload.'
+        example: 34
+        required: true
+        schema:
+          type: integer
+  /api/tag:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: string
+                  description: ''
+                  example: natus
+                text:
+                  type: array
+                  description: ''
+                  example:
+                    - dolorem
+                  items:
+                    type: string
+              required:
+                - task_id
+                - text
+  '/api/tag/{id}':
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the tag.'
+        example: 105
+        required: true
+        schema:
+          type: integer
+  '/api/changeStatus/{task_id}':
+    put:
+      summary: 'Change task status to complete or incomplete.'
+      description: 'Default: incomplete.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: task_id
+        description: 'The ID of the task.'
+        example: 51
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []
